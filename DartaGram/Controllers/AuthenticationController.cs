@@ -85,18 +85,35 @@ namespace DartaGram.Controllers
         }
 
         [HttpPost]
-        public JsonResult Save(AuthenticationModel m)
+        public JsonResult Save(AuthenticationModel authenticationModel)
         {
-            m.UserId = Guid.NewGuid();
-            m.password = Encrypt(m.password);
+            authenticationModel.UserId = Guid.NewGuid();
+            authenticationModel.password = Encrypt(authenticationModel.password);
+            var dirPath = Server.MapPath("~/Users");
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
             var filePath = Server.MapPath("~/Users/UsersList.json");
-            var jsonData = System.IO.File.ReadAllText(filePath);
-            var usersList = JsonConvert.DeserializeObject<List<AuthenticationModel>>(jsonData)
-                                  ?? new List<AuthenticationModel>();
-            usersList.Add(m);
-            jsonData = JsonConvert.SerializeObject(usersList);
-            System.IO.File.WriteAllText(filePath, jsonData);
-            return new JsonResult { Data = m };
+            if (System.IO.File.Exists(filePath))
+            {
+                var jsonData = System.IO.File.ReadAllText(filePath);
+                var usersList = JsonConvert.DeserializeObject<List<AuthenticationModel>>(jsonData)
+                                      ?? new List<AuthenticationModel>();
+                usersList.Add(authenticationModel);
+                jsonData = JsonConvert.SerializeObject(usersList);
+                System.IO.File.WriteAllText(filePath, jsonData);
+            }
+            else
+            {
+                FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate);
+                fs.Close();
+                List<AuthenticationModel> usersList = new List<AuthenticationModel>();
+                usersList.Add(authenticationModel);
+                var jsonData = JsonConvert.SerializeObject(usersList);
+                System.IO.File.WriteAllText(filePath, jsonData);
+            }
+            return new JsonResult { Data = authenticationModel };
         }
 
         // POST: Authentication/Create
