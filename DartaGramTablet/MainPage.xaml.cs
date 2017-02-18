@@ -45,13 +45,15 @@ namespace DartaGramTablet
             //InitializeMap();
             geomap();
             DartaGramPin pin = null;
+            int count = 3;
             //Set the  location of the pin to the center of the map. 
             //Bing.Maps.MapLayer.SetPosition(pin, myMap.Center);
             foreach(Location location in getLocationList())
-            {
-                pin = new DartaGramPin();
+            {             
+                pin = new DartaGramPin(count);
                 MapLayer.SetPosition(pin, location);
                 myMap.Children.Add(pin);
+                count++;
             }
         }
 

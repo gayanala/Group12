@@ -19,9 +19,27 @@ namespace DartaGramTablet
 {
     public sealed partial class DartaGramPin : UserControl
     {
-        public DartaGramPin()
+        public DartaGramPin(int count)
         {
             this.InitializeComponent();
+            infobox.Visibility = Visibility.Collapsed;
+            if(count==3)
+            {
+                img4.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                img4.Visibility = Visibility.Visible;
+            }
+        }
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            infobox.Visibility = Visibility.Collapsed;
+        }
+        private void red_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            infobox.Visibility = Visibility.Visible;
+
         }
     }
 }

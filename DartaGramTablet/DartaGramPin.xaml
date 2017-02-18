@@ -8,8 +8,30 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
+
     <Grid>
-        <Image HorizontalAlignment="Left" Margin="-25,-25,0,0" Height="50" VerticalAlignment="Top" Width="50" Source="Assets/Logo.png"/>
+        <Image HorizontalAlignment="Left" Margin="-25,-25,0,0" Height="50" DoubleTapped="red_DoubleTapped" VerticalAlignment="Top" Width="50" Source="Assets/Logo.png"/>
+        <Grid x:Name="infobox" HorizontalAlignment="Left" Height="311" VerticalAlignment="Top" Width="507" Margin="-20,-110,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid.Background>
+                <ImageBrush ImageSource="Assets/Info-Box.png"/>
+            </Grid.Background>
+            <Button x:Name="close" Content="X" HorizontalAlignment="Left" Margin="421,33,0,0" VerticalAlignment="Top" Click="close_Click"/>
+            <Grid Margin="80,83,60,46">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image HorizontalAlignment="Center" Name="img1"  VerticalAlignment="Center"  Grid.Row="0" Grid.Column="0" Source="Assets/converted_gif.gif" Stretch="UniformToFill"/>
+                <Image HorizontalAlignment="Center" Name="img3" Grid.Row="1" Grid.Column="0" Source="Assets/converted_gif.gif" Stretch="UniformToFill" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="87" Margin="0,4,182,0" />
+                <Image HorizontalAlignment="Left" Name="img2"  VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Source="Assets/converted_gif.gif" Stretch="UniformToFill" Height="93" Margin="5,0,0,0" Grid.RowSpan="2" Width="178"/>
+                <Image HorizontalAlignment="Left" Name="img4" Grid.Row="1" Grid.Column="1" Source="Assets/converted_gif.gif" Stretch="UniformToFill" VerticalAlignment="Top" Height="87" Margin="5,4,0,0" Width="178" />
+
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>
